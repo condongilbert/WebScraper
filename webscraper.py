@@ -1,26 +1,21 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 import time
+
 # Path to ChromeDriver
-driver_path = "C:/Users/v-gcondon/Downloads/chromedriver_win32/chromedriver.exe"
+driver_path = "C:/Users/v-gcondon/Downloads/chromedriver-win64/chromedriver.exe"
 
-# Create a Service object and pass it to the Chrome WebDriver
-service = Service(driver_path)
-driver = webdriver.Chrome(service=service)
-
-# Now you can use the driver to navigate and interact with the browser
-driver.get("https://www.google.com")
-
-# Set up Chrome options for headless mode
+# Set up Chrome options
 chrome_options = Options()
-chrome_options.add_argument("--headless")  # Run headless mode
+chrome_options.add_argument("--headless")  # Run in headless mode, optional
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-dev-shm-usage")
 
-# Initialize the WebDriver
-service = Service("path/to/chromedriver")  # Update with your chromedriver path
+# Create a Service object
+service = Service(driver_path)
+
+# Initialize the Chrome WebDriver
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
 try:
