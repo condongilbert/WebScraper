@@ -1,0 +1,18 @@
+import requests
+
+# Hardcoded URL of the PDF to download
+pdf_url = "https://www.berkshirehathaway.com/news/nov0224.pdf"
+
+try:
+    # Send a GET request to the URL
+    response = requests.get(pdf_url)
+    response.raise_for_status()  # Check for HTTP errors
+
+    # Save the response content to a file
+    with open("nov0224.pdf", "wb") as pdf_file:
+        pdf_file.write(response.content)
+
+    print("Download successful! PDF saved as 'nov0224.pdf'.")
+
+except Exception as e:
+    print(f"Failed to download the PDF: {e}")
