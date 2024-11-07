@@ -29,6 +29,18 @@ try:
     with open("downloaded_page.html", "w", encoding="utf-8") as file:
         file.write(page_source)
     print("Page HTML content saved as 'downloaded_page.html'. Check this file for links.")
+
+        # Find all link elements on the page
+    link_elements = driver.find_elements("tag name", "a")
+    
+    # Extract and store the href attribute of each link
+    links = [element.get_attribute("href") for element in link_elements if element.get_attribute("href")]
+    
+    # Save links to a text file
+    with open("extracted_links.txt", "w", encoding="utf-8") as file:
+        for link in links:
+            file.write(link + "\n")
+    print("Links extracted and saved as 'extracted_links.txt'.")
     
 finally:
     driver.quit()
