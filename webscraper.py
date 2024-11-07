@@ -24,23 +24,15 @@ try:
     driver.get(url)
     time.sleep(5)  # Wait for JavaScript to load content
     
-    # Save and print HTML content
-    page_source = driver.page_source
-    with open("downloaded_page.html", "w", encoding="utf-8") as file:
-        file.write(page_source)
-    print("Page HTML content saved as 'downloaded_page.html'. Check this file for links.")
-
-        # Find all link elements on the page
+    # Extract only PDF links
     link_elements = driver.find_elements("tag name", "a")
+    pdf_links = [element.get_attribute("href") for element in link_elements if element.get_attribute("href") and element.get_attribute("href").endswith(".pdf")]
     
-    # Extract and store the href attribute of each link
-    links = [element.get_attribute("href") for element in link_elements if element.get_attribute("href")]
-    
-    # Save links to a text file
-    with open("extracted_links.txt", "w", encoding="utf-8") as file:
-        for link in links:
+    # Save PDF links to a text file
+    with open("pdf_links.txt", "w", encoding="utf-8") as file:
+        for link in pdf_links:
             file.write(link + "\n")
-    print("Links extracted and saved as 'extracted_links.txt'.")
-    
+    print("PDF links extracted and saved as 'pdf_links.txt'.")
+
 finally:
     driver.quit()
